@@ -49,8 +49,8 @@ describe('BookingPage', () => {
     fixture.componentRef.setInput('businessId', 'missing');
     fixture.detectChanges();
 
-    // The page loads the three resources together. When the business fails, the other two
-    // requests are cancelled on purpose, so only the failing one is answered here.
+    // When one request of the group fails, the page cancels the other two on purpose,
+    // so only the failing request is answered here.
     http.expectOne(`${base}/businesses/missing`).flush({}, { status: 404, statusText: 'Not Found' });
 
     await fixture.whenStable();
